@@ -1,0 +1,49 @@
+{
+  "name": "react-frb",
+  "version": "0.0.0",
+  "description": "React FRB",
+  "main": "server.js",
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "harmony": true
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "express": "~4.10.6",
+    "fibers": "~1.0.4",
+    "flux": "^2.0.1",
+    "node-jsx": "~0.12.4",
+    "react": "~0.12.2",
+    "react-async": "~2.0.1",
+    "react-bootstrap": "~0.13.0",
+    "react-router-component": "^0.23.2",
+    "socket.io": "^1.2.1",
+    "socket.io-client": "^1.2.1",
+    "superagent": "^0.21.0",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "less": "~2.2.0",
+    "browserify": "^8.0.3",
+    "connect-browserify": "^3.2.1",
+    "parallelshell": "~1.0.3",
+    "reactify": "^0.17.1",
+    "rimraf": "~2.2.8",
+    "supervisor": "~0.6.0",
+    "watch": "^0.13.0"
+  },
+  "scripts": {
+    "clean": "rimraf -f build",
+    "less": "lessc source/client/style/app.less > build/app.css",
+    "watch:js": "supervisor -i node_modules -e js,jsx source/server.js",
+    "watch:less": "watch \"npm run less\" source/client/style/",
+    "watch": "parallelshell \"npm run watch:less\" \"npm run watch:js\"",
+    "serve": "npm run clean && mkdir build && npm run watch"
+  }
+}
