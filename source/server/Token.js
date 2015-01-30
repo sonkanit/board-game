@@ -8,4 +8,8 @@ function Token() {
   this.walks = randomNumber(6);
 }
 
+Token.prototype.id = null;
+
+Token.prototype.walks = null;
+
 module.exports = Token;
