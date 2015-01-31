@@ -19,9 +19,6 @@ function GameServer(http) {
 
     currentPlayers.push(player);
 
-    console.log(player.get());
-    player.set();
-
     socket.emit(PlayerActionType.INITIALIZED, player);
     socket.emit(GameActionType.INITIALIZED, { currentPlayers: currentPlayers });
     socket.broadcast.emit(GameActionType.UPDATED, { currentPlayers: currentPlayers });
