@@ -1,6 +1,5 @@
 'use strict';
 
-var Token = require('./Token');
 var Position = require('./Position');
 var randomNumber = require('../utilities/randomNumber');
 
@@ -18,15 +17,5 @@ Player.prototype.coins = null;
 Player.prototype.token = null;
 
 Player.prototype.position = null;
-
-Player.prototype.roll = function () {
-  if (this.coins > 0) {
-    this.coins--;
-    this.token = new Token();
-    return this.token;
-  } else {
-    throw 'Not Enough coins!'
-  }
-};
 
 module.exports = Player;

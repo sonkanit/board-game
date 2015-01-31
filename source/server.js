@@ -10,7 +10,7 @@ var nodejsx = require('node-jsx').install({ extension: '.jsx' });
 
 var App = require('./client/components/App.jsx');
 
-var Game = require('./server/Game');
+var GameServer = require('./server/GameServer');
 
 var renderApp = function (req, res, next) {
   var path = url.parse(req.url).pathname;
@@ -35,7 +35,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 var http = require('http').Server(app);
 
-Game.init(http);
+var sever = new GameServer(http);
 
 app.use('/build', express.static(path.join(__dirname, 'build')))
   .use(renderApp);
@@ -43,5 +43,3 @@ app.use('/build', express.static(path.join(__dirname, 'build')))
 http.listen(3000, function () {
     console.log('Server started: http://localhost:3000');
   });
-
-
