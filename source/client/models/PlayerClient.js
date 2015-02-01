@@ -18,6 +18,7 @@ PlayerClient.prototype.toString = function () {
 
 PlayerClient.prototype.update = function (player) {
   this.id = player.id;
+  this.fullName = player.fullName;
   this.coins = player.coins;
 
   if (player.token !== null) {

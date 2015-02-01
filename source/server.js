@@ -9,6 +9,8 @@ var browserify = require('connect-browserify');
 require('node-jsx').install({ extension: '.jsx' });
 var http = require('http');
 
+var __root = path.normalize(path.join(__dirname, '..'));
+
 var App = require('./client/components/App.jsx');
 
 var GameServer = require('./server/GameServer');
@@ -38,7 +40,7 @@ var server = http.Server(app);
 
 new GameServer(server);
 
-app.use('/build', express.static(path.join(__dirname, 'build')))
+app.use('/build', express.static(path.join(__root, 'build')))
   .use(renderApp);
 
 server.listen(3000, function () {

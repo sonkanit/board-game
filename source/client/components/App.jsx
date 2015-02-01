@@ -34,7 +34,7 @@ var App = React.createClass({
           <script src="/build/app.js" />
           <title>Game</title>
         </head>
-        <body className="container">
+        <body className="container-fluid">
           <Locations path={ this.props.path } onNavigation={ this.handleNavigation }>
             <Location path="/" handler={ Demo } />
             <NotFound handler={ PageNotFound } />

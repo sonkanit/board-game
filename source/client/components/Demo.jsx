@@ -23,7 +23,7 @@ var Demo = React.createClass({
 
     var getPlayerItem = function (player) {
       return (
-        <li>{ player.id } ({ player.position.x }, { player.position.y })</li>
+        <li>{ player.fullName } ({ player.position.x }, { player.position.y })</li>
       );
     };
 
@@ -37,15 +37,23 @@ var Demo = React.createClass({
 
     return (
       <div>
-        <button onClick={ roll }>Roll</button>
-        <button style={ walkButton } onClick={ walk }>Walk</button>
-        <h3>Player Info</h3>
-        <ul>
-          <li>ID: { this.state.player.id }</li>
-          <li>Coins: { this.state.player.coins }</li>
-          <li>Token: { toString(this.state.player.token) }</li>
-          <li>Position: { toString(this.state.player.position) }</li>
-        </ul>
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <h4>{ this.state.player.fullName }</h4>
+            <dl className="dl-horizontal">
+              <dt>ID</dt>
+              <dd>{ this.state.player.id }</dd>
+              <dt>Coins</dt>
+              <dd>{ this.state.player.coins }</dd>
+              <dt>Token</dt>
+              <dd>{ toString(this.state.player.token) }</dd>
+              <dt>Position</dt>
+              <dd>{ toString(this.state.player.position) }</dd>
+            </dl>
+            <button className="btn btn-primary" onClick={ roll }>Roll</button>
+            <button className="btn btn-primary" style={ walkButton } onClick={ walk }>Walk</button>
+          </div>
+        </div>
         <h3>Online Players</h3>
         <ul>
           { this.state.environment.players.map(getPlayerItem) }
