@@ -1,15 +1,21 @@
 'use strict';
 
 var GameClient = require('../utilities/GameClient');
-// var AppDispatcher = require('../dispatcher/AppDispatcher');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
 var RollActionType = require('../../constants/RollActionType');
 
-var handleRollSuccess = function (result) {
-  console.log(result);
+var handleRollSuccess = function (token) {
+  AppDispatcher.handleServerAction({
+    actionType: RollActionType.ROLL_SUCCESS,
+    token: token
+  });
 };
 
 var handleRollError = function (ex) {
-  console.log(ex);
+  AppDispatcher.handleServerAction({
+    actionType: RollActionType.ROLL_ERROR,
+    expection: ex
+  });
 };
 
 var RollAction = {
@@ -19,6 +25,9 @@ var RollAction = {
   },
   roll: function () {
     GameClient.socket.emit(RollActionType.ROLL);
+    AppDispatcher.handleServerAction({
+      actionType: RollActionType.ROLL
+    });
   }
 };
 

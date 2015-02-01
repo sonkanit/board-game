@@ -8,6 +8,13 @@ var React = require('react');
 var GameMixin = require('../mixins/GameMixin');
 
 var RollAction = require('../actions/RollAction');
+var WalkAction = require('../actions/WalkAction');
+
+var Position = require('../../models/Position');
+
+// TODO: Remove this
+var Chance = require('chance');
+var chance = new Chance();
 
 var Demo = React.createClass({
   mixins: [GameMixin],
@@ -18,12 +25,13 @@ var Demo = React.createClass({
     };
 
     var walk = function () {
-      alert('walk');
+      // MOCKUP
+      WalkAction.walk(new Position(chance.integer({ min: 0, max: 100 }), chance.integer({ min: 0, max: 100 })));
     };
 
     var getPlayerItem = function (player) {
       return (
-        <li>{ player.fullName } ({ player.position.x }, { player.position.y })</li>
+        <li key={ player.id }>{ player.fullName } ({ player.position.x }, { player.position.y })</li>
       );
     };
 

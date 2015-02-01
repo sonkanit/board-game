@@ -6,6 +6,7 @@ var EnvironmentServer = require('./models/EnvironmentServer');
 var EnvironmentActionType = require('../constants/EnvironmentActionType');
 var PlayerActionType = require('../constants/PlayerActionType');
 var RollActionType = require('../constants/RollActionType');
+var WalkActionType = require('../constants/WalkActionType');
 
 var io;
 var environment = new EnvironmentServer();
@@ -21,6 +22,9 @@ function GameServer(http) {
 
     var clientData = environment.getClientData();
 
+    // TODO: modulize this
+    // TODO: minimize interaction??
+
     socket.emit(PlayerActionType.INITIALIZED, player);
     socket.emit(EnvironmentActionType.INITIALIZED, clientData);
     socket.broadcast.emit(EnvironmentActionType.UPDATED, clientData);
@@ -32,7 +36,22 @@ function GameServer(http) {
         socket.emit(RollActionType.ROLL_ERROR, ex);
       } finally {
         socket.emit(PlayerActionType.UPDATED, player);
-        socket.broadcast.emit(EnvironmentActionType.UPDATED, environment.getClientData());
+        var clientData = environment.getClientData();
+        socket.emit(EnvironmentActionType.UPDATED, clientData);
+        socket.broadcast.emit(EnvironmentActionType.UPDATED, clientData);
+      }
+    });
+
+    // TODO: duplicate code
+    socket.on(WalkActionType.WALK, function (position) {
+      try {
+        socket.emit(WalkActionType.WALK_SUCCESS, player.walk(position));
+      } catch (ex) {
+        socket.emit(WalkActionType.WALK_ERROR, ex);
+      } finally {
+        socket.emit(PlayerActionType.UPDATED, player);
+        socket.emit(EnvironmentActionType.UPDATED, clientData);
+        socket.broadcast.emit(EnvironmentActionType.UPDATED, clientData);
       }
     });
 

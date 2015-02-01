@@ -26,6 +26,8 @@ PlayerClient.prototype.update = function (player) {
       this.token = new TokenClient();
     }
     this.token.update(player.token);
+  } else {
+    this.token = null;
   }
 
   if (player.position !== null) {
@@ -33,6 +35,8 @@ PlayerClient.prototype.update = function (player) {
       this.position = new PositionClient();
     }
     this.position.update(player.position);
+  } else {
+    this.position = null;
   }
 };
 
