@@ -2,12 +2,12 @@
 
 var io = require('socket.io-client');
 
+// Static class
 var GameClient = {
+  init: function (url) {
+    this.socket = io(url);
+  },
   socket: null
 };
 
 module.exports = GameClient;
-
-if (typeof window !== 'undefined') {
-  GameClient.socket = io(window.location.origin);
-}

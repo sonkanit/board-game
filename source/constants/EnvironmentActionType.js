@@ -1,8 +1,8 @@
 'use strict';
 
-var GameActionType = {
+var EnvironmentActionType = {
   INITIALIZED: 'GAME_INITIALIZED',
   UPDATED: 'GAME_UPDATED'
 };
 
-module.exports = GameActionType;
+module.exports = EnvironmentActionType;

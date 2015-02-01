@@ -1,8 +1,8 @@
 {
-  "name": "react-frb",
+  "name": "board-game",
   "version": "0.0.0",
-  "description": "React FRB",
-  "main": "server.js",
+  "description": "board-game",
+  "main": "sorce/server.js",
   "browserify": {
     "transform": [
       [
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "bootstrap": "~3.3.1",
+    "chance": "^0.7.3",
     "express": "~4.10.6",
     "fibers": "~1.0.4",
     "flux": "^2.0.1",

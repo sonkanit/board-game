@@ -1,13 +1,14 @@
 'use strict';
 
-var PlayerServer = require('./PlayerServer');
+var PlayerServer = require('./models/PlayerServer');
+var EnvironmentServer = require('./models/EnvironmentServer');
 
-var GameActionType = require('../constants/GameActionType');
+var EnvironmentActionType = require('../constants/EnvironmentActionType');
 var PlayerActionType = require('../constants/PlayerActionType');
 var RollActionType = require('../constants/RollActionType');
 
 var io;
-var currentPlayers = [];
+var environment = new EnvironmentServer();
 
 function GameServer(http) {
   io = require('socket.io')(http);
@@ -16,12 +17,13 @@ function GameServer(http) {
     var id = socket.id;
 
     var player = new PlayerServer(id);
+    environment.addPlayer(player);
 
-    currentPlayers.push(player);
+    var clientData = environment.getClientData();
 
     socket.emit(PlayerActionType.INITIALIZED, player);
-    socket.emit(GameActionType.INITIALIZED, { currentPlayers: currentPlayers });
-    socket.broadcast.emit(GameActionType.UPDATED, { currentPlayers: currentPlayers });
+    socket.emit(EnvironmentActionType.INITIALIZED, clientData);
+    socket.broadcast.emit(EnvironmentActionType.UPDATED, clientData);
 
     socket.on(RollActionType.ROLL, function () {
       try {
@@ -30,13 +32,13 @@ function GameServer(http) {
         socket.emit(RollActionType.ROLL_ERROR, ex);
       } finally {
         socket.emit(PlayerActionType.UPDATED, player);
-        socket.broadcast.emit(GameActionType.UPDATED, { currentPlayers: currentPlayers });
+        socket.broadcast.emit(EnvironmentActionType.UPDATED, environment.getClientData());
       }
     });
 
     socket.on('disconnect', function () {
-      currentPlayers.splice(currentPlayers.indexOf(player), 1);
-      socket.broadcast.emit(GameActionType.UPDATED, { currentPlayers: currentPlayers });
+      environment.removePlayer(player);
+      socket.broadcast.emit(EnvironmentActionType.UPDATED, environment);
     });
   });
 }

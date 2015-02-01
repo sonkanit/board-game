@@ -1,7 +1,7 @@
 'use strict';
 
 var GameClient = require('../utilities/GameClient');
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+// var AppDispatcher = require('../dispatcher/AppDispatcher');
 var RollActionType = require('../../constants/RollActionType');
 
 var handleRollSuccess = function (result) {

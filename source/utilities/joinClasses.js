@@ -11,7 +11,7 @@
  * https://github.com/facebook/react/blob/v0.12.0/PATENTS
  */
 
-"use strict";
+'use strict';
 
 /**
  * Combines multiple className strings into one.

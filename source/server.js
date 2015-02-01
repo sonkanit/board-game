@@ -6,7 +6,8 @@ var express = require('express');
 var React = require('react');
 var ReactAsync  = require('react-async');
 var browserify = require('connect-browserify');
-var nodejsx = require('node-jsx').install({ extension: '.jsx' });
+require('node-jsx').install({ extension: '.jsx' });
+var http = require('http');
 
 var App = require('./client/components/App.jsx');
 
@@ -33,13 +34,13 @@ if (process.env.NODE_ENV !== 'production') {
     }));
 }
 
-var http = require('http').Server(app);
+var server = http.Server(app);
 
-var sever = new GameServer(http);
+new GameServer(server);
 
 app.use('/build', express.static(path.join(__dirname, 'build')))
   .use(renderApp);
 
-http.listen(3000, function () {
+server.listen(3000, function () {
     console.log('Server started: http://localhost:3000');
   });

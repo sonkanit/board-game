@@ -3,14 +3,14 @@
 var _ = require('underscore');
 var EventEmitter = require('events').EventEmitter;
 
-var Player = require('../../model/Player');
+var PlayerClient = require('../models/PlayerClient');
 
 var PlayerActionType = require('../../constants/PlayerActionType');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var CHANGE_EVENT = 'PLAYER_CHANGE';
 
-var player = new Player();
+var player = new PlayerClient();
 
 var PlayerStore = _.extend({}, EventEmitter.prototype, {
   emitChange: function () {
@@ -35,10 +35,10 @@ var PlayerStore = _.extend({}, EventEmitter.prototype, {
     switch (action.actionType) {
       case PlayerActionType.INITIALIZED:
       case PlayerActionType.UPDATED:
-        _.extend(player, action.player);
+        player.update(action.player);
         PlayerStore.emitChange();
         break;
-    };
+    }
 
     return true;
   })
