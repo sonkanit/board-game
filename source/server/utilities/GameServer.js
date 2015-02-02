@@ -33,7 +33,7 @@ function GameServer(http) {
       try {
         player.roll();
         socket.emit(RollActionType.ROLL_SUCCESS, player);
-        socket.broadcast.emit(EnvironmentActionType.ENVIRONMENT_PLAYER_UPDATED, player.getPublicData());
+        socket.broadcast.emit(RollActionType.ROLL_SUCCESS, player.getPublicData());
       } catch (ex) {
         socket.emit(RollActionType.ROLL_ERROR, ex);
       }
@@ -44,7 +44,7 @@ function GameServer(http) {
       try {
         player.walk(position);
         socket.emit(WalkActionType.WALK_SUCCESS, player);
-        socket.broadcast.emit(EnvironmentActionType.ENVIRONMENT_PLAYER_UPDATED, player.getPublicData());
+        socket.broadcast.emit(WalkActionType.WALK_SUCCESS, player.getPublicData());
       } catch (ex) {
         socket.emit(WalkActionType.WALK_ERROR, ex);
       }

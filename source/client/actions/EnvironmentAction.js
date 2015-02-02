@@ -25,19 +25,11 @@ var handlePlayerDisconnected = function (player) {
   });
 };
 
-var handlePlayerUpdated = function (player) {
-  AppDispatcher.handleServerAction({
-    actionType: EnvironmentActionType.ENVIRONMENT_PLAYER_UPDATED,
-    player: player
-  });
-};
-
 var EnvironmentAction = {
   listen: function () {
     GameClient.socket.on(EnvironmentActionType.INITIALIZED, handleEnvironmentInitialized);
     GameClient.socket.on(EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED, handlePlayerConnected);
     GameClient.socket.on(EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED, handlePlayerDisconnected);
-    GameClient.socket.on(EnvironmentActionType.ENVIRONMENT_PLAYER_UPDATED, handlePlayerUpdated);
   }
 };
 

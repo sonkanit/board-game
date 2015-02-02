@@ -9,6 +9,7 @@ var Chance = require('chance');
 var chance = new Chance();
 
 var validateWalk = function () {
+  // TODO:
   return true;
 };
 

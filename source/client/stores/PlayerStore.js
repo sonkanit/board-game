@@ -38,10 +38,15 @@ var PlayerStore = _.extend({}, EventEmitter.prototype, {
     switch (action.actionType) {
       case PlayerActionType.INITIALIZED:
       case PlayerActionType.UPDATED:
-      case RollActionType.ROLL_SUCCESS:
-      case WalkActionType.WALK_SUCCESS:
         player.update(action.player);
         PlayerStore.emitChange();
+        break;
+      case RollActionType.ROLL_SUCCESS:
+      case WalkActionType.WALK_SUCCESS:
+        if (player.id === action.player.id) {
+          player.update(action.player);
+          PlayerStore.emitChange();
+        }
         break;
     }
 

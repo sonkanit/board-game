@@ -6,9 +6,12 @@ var EventEmitter = require('events').EventEmitter;
 var EnvironmentClient = require('../models/EnvironmentClient');
 
 var EnvironmentActionType = require('../../constants/EnvironmentActionType');
+var RollActionType = require('../../constants/RollActionType');
+var WalkActionType = require('../../constants/WalkActionType');
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
-var CHANGE_EVENT = 'ENVIROMENT_CHANGE';
+var CHANGE_EVENT = 'ENVIRONMENT_CHANGE';
 
 var environment = new EnvironmentClient();
 
@@ -42,11 +45,13 @@ var EnvironmentStore = _.extend({}, EventEmitter.prototype, {
       case EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED:
         environment.removePlayer(action.player);
         break;
-      case EnvironmentActionType.ENVIRONMENT_PLAYER_UPDATED:
+      case RollActionType.ROLL_SUCCESS:
+      case WalkActionType.WALK_SUCCESS:
         environment.updatePlayer(action.player);
         break;
     }
 
+    // Log every actions
     environment.logs.push(payload);
     EnvironmentStore.emitChange();
 
