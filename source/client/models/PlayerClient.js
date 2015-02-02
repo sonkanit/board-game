@@ -13,12 +13,12 @@ function PlayerClient() {
 PlayerClient.prototype = Object.create(Player.prototype);
 
 PlayerClient.prototype.toString = function () {
-  return stringFormat('{0}', this.fullName);
+  return stringFormat('{0}', this.name);
 };
 
 PlayerClient.prototype.update = function (player) {
   this.id = player.id;
-  this.fullName = player.fullName;
+  this.name = player.name;
   this.coins = player.coins;
 
   if (player.token) {

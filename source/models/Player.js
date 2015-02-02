@@ -9,7 +9,7 @@ Player.prototype = Object.create(Entity.prototype);
 
 Player.prototype.id = null;
 
-Player.prototype.fullName = null;
+Player.prototype.name = null;
 
 Player.prototype.coins = null;
 
@@ -19,7 +19,7 @@ Player.prototype.position = null;
 
 Player.prototype.publicFields = [
   'id',
-  'fullName',
+  'name',
   'coins',
   'position'
 ];

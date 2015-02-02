@@ -31,7 +31,7 @@ var Demo = React.createClass({
 
     var getPlayerItem = function (player, idx) {
       return (
-        <li key={ player.id || 'undefined' }>{ toString(player.fullName) } { toString(player.position) }</li>
+        <li key={ player.id || 'undefined' }>{ toString(player.name) } { toString(player.position) }</li>
       );
     };
 
@@ -53,7 +53,7 @@ var Demo = React.createClass({
       <div>
         <div className="panel panel-default">
           <div className="panel-body">
-            <h4>{ this.state.player.fullName }</h4>
+            <h4>{ this.state.player.name }</h4>
             <dl className="dl-horizontal">
               <dt>ID</dt>
               <dd>{ this.state.player.id }</dd>

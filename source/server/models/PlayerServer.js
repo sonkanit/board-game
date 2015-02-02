@@ -18,7 +18,7 @@ function PlayerServer(id) {
 
   // TODO: MOCKUP
   this.id = id;
-  this.fullName = chance.name();
+  this.name = chance.name();
   this.coins = chance.integer({ min: 1, max: 20 });
   this.token = null;
   this.position = new Position(chance.integer({ min: 0, max: 100 }), chance.integer({ min: 0, max: 100 }));
