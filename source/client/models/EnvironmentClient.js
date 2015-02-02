@@ -8,6 +8,9 @@ var findWithAttr = require('../../utilities/findWithAttr');
 
 function EnvironmentClient() {
   Environment.call(this);
+
+  // TODO: INVESTIGATE WHY this.logs = []; is not required here.
+  // this.logs = [];
 }
 
 // Inheritance

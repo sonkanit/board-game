@@ -1,17 +1,21 @@
 'use strict';
 
-function PublicData() { }
+function Entity() { }
 
-PublicData.prototype.getPublicData = function () {
+Entity.prototype.id = null;
+
+Entity.prototype.publicize = function () {
   var data = {};
 
-  this.publicFields.forEach(function (field) {
+  this.publics().forEach(function (field) {
     data[field] = this[field];
   }.bind(this));
 
   return data;
 };
 
-PublicData.prototype.publicFields = [];
+Entity.prototype.publics = function () {
+  return ['id'];
+};
 
-module.exports = PublicData;
+module.exports = Entity;

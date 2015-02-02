@@ -23,17 +23,15 @@ function GameServer(http) {
     // TODO: modulize this
     // TODO: minimize interaction??
 
-    var environmentData = environment.getPublicData(player);
-
     socket.emit(PlayerActionType.INITIALIZED, player);
-    socket.emit(EnvironmentActionType.INITIALIZED, environmentData);
-    socket.broadcast.emit(EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED, player);
+    socket.emit(EnvironmentActionType.INITIALIZED, environment.publicize(player));
+    socket.broadcast.emit(EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED, player.publicize());
 
     socket.on(RollActionType.ROLL, function () {
       try {
         player.roll();
         socket.emit(RollActionType.ROLL_SUCCESS, player);
-        socket.broadcast.emit(RollActionType.ROLL_SUCCESS, player.getPublicData());
+        socket.broadcast.emit(RollActionType.ROLL_SUCCESS, player.publicize());
       } catch (ex) {
         socket.emit(RollActionType.ROLL_ERROR, ex);
       }
@@ -44,7 +42,7 @@ function GameServer(http) {
       try {
         player.walk(position);
         socket.emit(WalkActionType.WALK_SUCCESS, player);
-        socket.broadcast.emit(WalkActionType.WALK_SUCCESS, player.getPublicData());
+        socket.broadcast.emit(WalkActionType.WALK_SUCCESS, player.publicize());
       } catch (ex) {
         socket.emit(WalkActionType.WALK_ERROR, ex);
       }
@@ -52,7 +50,7 @@ function GameServer(http) {
 
     socket.on('disconnect', function () {
       environment.removePlayer(player);
-      socket.broadcast.emit(EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED, player.getPublicData());
+      socket.broadcast.emit(EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED, player.publicize());
     });
   });
 }

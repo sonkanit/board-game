@@ -1,13 +1,13 @@
 'use strict';
 
-var Entity = require('./Entity');
+var Creature = require('./Creature');
 
-function Player() { }
+function Player() {
+  Creature.call(this);
+}
 
 // Inheritance
-Player.prototype = Object.create(Entity.prototype);
-
-Player.prototype.id = null;
+Player.prototype = Object.create(Creature.prototype);
 
 Player.prototype.name = null;
 
@@ -17,11 +17,9 @@ Player.prototype.token = null;
 
 Player.prototype.position = null;
 
-Player.prototype.publicFields = [
-  'id',
-  'name',
-  'coins',
-  'position'
-];
+// Override
+Player.prototype.publics = function () {
+  return Creature.prototype.publics.call(this).concat(['name', 'coins', 'token', 'position']);
+};
 
 module.exports = Player;

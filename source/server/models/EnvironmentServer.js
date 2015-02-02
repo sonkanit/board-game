@@ -24,12 +24,12 @@ EnvironmentServer.prototype.removePlayer = function (player) {
 };
 
 // Override
-EnvironmentServer.prototype.getPublicData = function (player) {
+EnvironmentServer.prototype.publicize = function (player) {
   return {
     players: this.players.filter(function (_player) {
       return _player !== player;
     }).map(function (_player) {
-      return _player.getPublicData();
+      return _player.publicize();
     })
   };
 };

@@ -5,6 +5,8 @@ var TokenClient = require('./TokenClient');
 var PositionClient = require('./PositionClient');
 var stringFormat = require('../../utilities/stringFormat');
 
+var Entity = require('../../models/Entity');
+
 function PlayerClient() {
   Player.call(this);
 }
