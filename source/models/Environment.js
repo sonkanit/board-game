@@ -1,13 +1,13 @@
 'use strict';
 
-var PublicData = require('./PublicData');
+var Entity = require('./Entity');
 
 function Environment() {
   this.players = [];
 }
 
 // Inheritance
-Environment.prototype = Object.create(PublicData.prototype);
+Environment.prototype = Object.create(Entity.prototype);
 
 Environment.prototype.players = null;
 

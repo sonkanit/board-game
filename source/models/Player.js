@@ -1,11 +1,11 @@
 'use strict';
 
-var PublicData = require('./PublicData');
+var Entity = require('./Entity');
 
 function Player() { }
 
 // Inheritance
-Player.prototype = Object.create(PublicData.prototype);
+Player.prototype = Object.create(Entity.prototype);
 
 Player.prototype.id = null;
 
