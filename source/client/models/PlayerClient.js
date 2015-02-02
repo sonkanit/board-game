@@ -21,7 +21,7 @@ PlayerClient.prototype.update = function (player) {
   this.fullName = player.fullName;
   this.coins = player.coins;
 
-  if (player.token !== null) {
+  if (player.token) {
     if (!(this.token instanceof TokenClient)) {
       this.token = new TokenClient();
     }
@@ -30,7 +30,7 @@ PlayerClient.prototype.update = function (player) {
     this.token = null;
   }
 
-  if (player.position !== null) {
+  if (player.position) {
     if (!(this.position instanceof PositionClient)) {
       this.position = new PositionClient();
     }

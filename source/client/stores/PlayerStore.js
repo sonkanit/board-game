@@ -6,6 +6,9 @@ var EventEmitter = require('events').EventEmitter;
 var PlayerClient = require('../models/PlayerClient');
 
 var PlayerActionType = require('../../constants/PlayerActionType');
+var RollActionType = require('../../constants/RollActionType');
+var WalkActionType = require('../../constants/WalkActionType');
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var CHANGE_EVENT = 'PLAYER_CHANGE';
@@ -35,6 +38,8 @@ var PlayerStore = _.extend({}, EventEmitter.prototype, {
     switch (action.actionType) {
       case PlayerActionType.INITIALIZED:
       case PlayerActionType.UPDATED:
+      case RollActionType.ROLL_SUCCESS:
+      case WalkActionType.WALK_SUCCESS:
         player.update(action.player);
         PlayerStore.emitChange();
         break;

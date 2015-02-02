@@ -13,7 +13,7 @@ var __root = path.normalize(path.join(__dirname, '..'));
 
 var App = require('./client/components/App.jsx');
 
-var GameServer = require('./server/GameServer');
+var GameServer = require('./server/utilities/GameServer');
 
 var renderApp = function (req, res, next) {
   var path = url.parse(req.url).pathname;

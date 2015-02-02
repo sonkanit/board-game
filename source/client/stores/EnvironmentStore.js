@@ -10,7 +10,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var CHANGE_EVENT = 'ENVIROMENT_CHANGE';
 
-var enviroment = new EnvironmentClient();
+var environment = new EnvironmentClient();
 
 var EnvironmentStore = _.extend({}, EventEmitter.prototype, {
   emitChange: function () {
@@ -26,7 +26,7 @@ var EnvironmentStore = _.extend({}, EventEmitter.prototype, {
   },
 
   get: function () {
-    return enviroment;
+    return environment;
   },
 
   dispatchToken: AppDispatcher.register(function (payload) {
@@ -34,11 +34,21 @@ var EnvironmentStore = _.extend({}, EventEmitter.prototype, {
 
     switch (action.actionType) {
       case EnvironmentActionType.INITIALIZED:
-      case EnvironmentActionType.UPDATED:
-        enviroment.update(action.enviroment);
-        EnvironmentStore.emitChange();
+        environment.update(action.environment);
+        break;
+      case EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED:
+        environment.addPlayer(action.player);
+        break;
+      case EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED:
+        environment.removePlayer(action.player);
+        break;
+      case EnvironmentActionType.ENVIRONMENT_PLAYER_UPDATED:
+        environment.updatePlayer(action.player);
         break;
     }
+
+    environment.logs.push(payload);
+    EnvironmentStore.emitChange();
 
     return true;
   })

@@ -29,9 +29,15 @@ var Demo = React.createClass({
       WalkAction.walk(new Position(chance.integer({ min: 0, max: 100 }), chance.integer({ min: 0, max: 100 })));
     };
 
-    var getPlayerItem = function (player) {
+    var getPlayerItem = function (player, idx) {
       return (
-        <li key={ player.id }>{ player.fullName } ({ player.position.x }, { player.position.y })</li>
+        <li key={ player.id || 'undefined' }>{ toString(player.fullName) } { toString(player.position) }</li>
+      );
+    };
+
+    var getLogItem = function (log, idx) {
+      return (
+        <li key={ idx }>{ log }</li>
       );
     };
 
@@ -62,10 +68,22 @@ var Demo = React.createClass({
             <button className="btn btn-primary" style={ walkButton } onClick={ walk }>Walk</button>
           </div>
         </div>
-        <h3>Online Players</h3>
-        <ul>
-          { this.state.environment.players.map(getPlayerItem) }
-        </ul>
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <h4>Online Players</h4>
+            <ul>
+              { [this.state.player].concat(this.state.environment.players).map(getPlayerItem) }
+            </ul>
+          </div>
+        </div>
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <h4>Logs</h4>
+            <ul>
+              { this.state.environment.logs.map(getLogItem) }
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }

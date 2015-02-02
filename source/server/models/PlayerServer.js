@@ -18,7 +18,7 @@ function PlayerServer(id) {
   // TODO: MOCKUP
   this.id = id;
   this.fullName = chance.name();
-  this.coins = chance.integer({ min: 0, max: 20 });
+  this.coins = chance.integer({ min: 1, max: 20 });
   this.token = null;
   this.position = new Position(chance.integer({ min: 0, max: 100 }), chance.integer({ min: 0, max: 100 }));
 }
@@ -26,11 +26,20 @@ function PlayerServer(id) {
 // Inheritance
 PlayerServer.prototype = Object.create(Player.prototype);
 
+PlayerServer.prototype.getPublicData = function () {
+  return {
+    id: this.id,
+    fullName: this.fullName,
+    coins: this.coins,
+    position: this.position
+  };
+};
+
 PlayerServer.prototype.roll = function () {
   if (this.coins > 0) {
     this.coins--;
     this.token = new Token();
-    this.token.walks = chance.integer({ min: 0, max: 6 });
+    this.token.walks = chance.integer({ min: 1, max: 6 });
     return this.token;
   } else {
     throw 'Not Enough coins!';
@@ -41,6 +50,9 @@ PlayerServer.prototype.walk = function (position) {
   if (validateWalk()) {
     this.token = null;
     this.position = position;
+    return this.position;
+  } else {
+    throw 'Invalid walk path!';
   }
 };
 

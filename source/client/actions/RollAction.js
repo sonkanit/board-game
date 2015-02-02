@@ -4,10 +4,10 @@ var GameClient = require('../utilities/GameClient');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var RollActionType = require('../../constants/RollActionType');
 
-var handleRollSuccess = function (token) {
+var handleRollSuccess = function (player) {
   AppDispatcher.handleServerAction({
     actionType: RollActionType.ROLL_SUCCESS,
-    token: token
+    player: player
   });
 };
 

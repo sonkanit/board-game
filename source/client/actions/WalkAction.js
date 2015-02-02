@@ -4,14 +4,14 @@ var GameClient = require('../utilities/GameClient');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var WalkActionType = require('../../constants/WalkActionType');
 
-var handleRollSuccess = function (token) {
+var handleWalkSuccess = function (player) {
   AppDispatcher.handleServerAction({
     actionType: WalkActionType.WALK_SUCCESS,
-    token: token
+    player: player
   });
 };
 
-var handleRollError = function (ex) {
+var handleWalkError = function (ex) {
   AppDispatcher.handleServerAction({
     actionType: WalkActionType.WALK_ERROR,
     expection: ex
@@ -20,8 +20,8 @@ var handleRollError = function (ex) {
 
 var WalkAction = {
   listen: function () {
-    GameClient.socket.on(WalkActionType.WALK_SUCCESS, handleRollSuccess);
-    GameClient.socket.on(WalkActionType.WALK_ERROR, handleRollError);
+    GameClient.socket.on(WalkActionType.WALK_SUCCESS, handleWalkSuccess);
+    GameClient.socket.on(WalkActionType.WALK_ERROR, handleWalkError);
   },
   walk: function (position) {
     GameClient.socket.emit(WalkActionType.WALK, position);

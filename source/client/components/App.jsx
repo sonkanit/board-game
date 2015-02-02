@@ -20,6 +20,7 @@ var GameMixin = require('../mixins/GameMixin');
 var EnvironmentAction = require('../actions/EnvironmentAction');
 var PlayerAction = require('../actions/PlayerAction');
 var RollAction = require('../actions/RollAction');
+var WalkAction = require('../actions/WalkAction');
 
 var App = React.createClass({
   handleNavigation: function () {
@@ -50,9 +51,10 @@ module.exports = App;
 if (typeof window !== 'undefined') {
   window.onload = function() {
     GameClient.init(window.location.origin);
-    EnvironmentAction.listen()
+    EnvironmentAction.listen();
     PlayerAction.listen();
     RollAction.listen();
+    WalkAction.listen();
     React.render(React.createElement(App, { path: window.location.pathname }), document);
   }
 }

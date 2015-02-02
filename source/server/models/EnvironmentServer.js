@@ -23,8 +23,14 @@ EnvironmentServer.prototype.removePlayer = function (player) {
   }
 };
 
-EnvironmentServer.prototype.getClientData = function () {
-  return this;
+EnvironmentServer.prototype.getClientData = function (player) {
+  return {
+    players: this.players.filter(function (_player) {
+      return _player !== player;
+    }).map(function (_player) {
+      return _player.getPublicData();
+    })
+  };
 };
 
 module.exports = EnvironmentServer;
