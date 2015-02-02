@@ -23,7 +23,8 @@ EnvironmentServer.prototype.removePlayer = function (player) {
   }
 };
 
-EnvironmentServer.prototype.getClientData = function (player) {
+// Override
+EnvironmentServer.prototype.getPublicData = function (player) {
   return {
     players: this.players.filter(function (_player) {
       return _player !== player;

@@ -23,10 +23,10 @@ function GameServer(http) {
     // TODO: modulize this
     // TODO: minimize interaction??
 
-    var clientData = environment.getClientData(player);
+    var environmentData = environment.getPublicData(player);
 
     socket.emit(PlayerActionType.INITIALIZED, player);
-    socket.emit(EnvironmentActionType.INITIALIZED, clientData);
+    socket.emit(EnvironmentActionType.INITIALIZED, environmentData);
     socket.broadcast.emit(EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED, player);
 
     socket.on(RollActionType.ROLL, function () {

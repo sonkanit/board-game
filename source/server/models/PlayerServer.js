@@ -27,15 +27,6 @@ function PlayerServer(id) {
 // Inheritance
 PlayerServer.prototype = Object.create(Player.prototype);
 
-PlayerServer.prototype.getPublicData = function () {
-  return {
-    id: this.id,
-    fullName: this.fullName,
-    coins: this.coins,
-    position: this.position
-  };
-};
-
 PlayerServer.prototype.roll = function () {
   if (this.coins > 0) {
     this.coins--;
