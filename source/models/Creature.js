@@ -11,11 +11,15 @@ Creature.prototype = Object.create(Entity.prototype);
 
 Creature.prototype.hp = null;
 
-Creature.prototype.power = null;
+Creature.prototype.attack = null;
+
+Creature.prototype.defence = null;
+
+Creature.prototype.attackVary = null;
 
 // Override
 Creature.prototype.publics = function () {
-  return Entity.prototype.publics.call(this).concat(['hp', 'power']);
+  return Entity.prototype.publics.call(this).concat(['hp', 'attack', 'defence', 'attackVary']);
 };
 
 module.exports = Creature;

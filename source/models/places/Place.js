@@ -1,15 +1,14 @@
 'use strict';
 
-var Entity = require('./Entity');
+var Entity = require('../Entity');
 
-// Town
-// Tresure box
-// Church
 function Place() {
   Entity.call(this);
 }
 
 // Inheritance
 Place.prototype = Object.create(Entity.prototype);
+
+Place.prototype.name = null;
 
 module.exports = Place;

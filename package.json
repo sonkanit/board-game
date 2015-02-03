@@ -42,7 +42,7 @@
   "scripts": {
     "clean": "rimraf -f build",
     "less": "lessc source/client/style/app.less > build/app.css",
-    "watch:js": "supervisor -i node_modules -e js,jsx source/server.js",
+    "watch:js": "supervisor -i node_modules -e js,jsx --debug source/server.js",
     "watch:less": "watch \"npm run less\" source/client/style/",
     "watch": "parallelshell \"npm run watch:less\" \"npm run watch:js\"",
     "serve": "npm run clean && mkdir build && npm run watch"

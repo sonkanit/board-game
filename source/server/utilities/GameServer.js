@@ -8,8 +8,11 @@ var PlayerActionType = require('../../constants/PlayerActionType');
 var RollActionType = require('../../constants/RollActionType');
 var WalkActionType = require('../../constants/WalkActionType');
 
+// TODO: remove this
+var Mockup = require('./Mockup');
+
 var io;
-var environment = new EnvironmentServer();
+var environment = Mockup.environment();
 
 function GameServer(http) {
   io = require('socket.io')(http);
@@ -17,7 +20,7 @@ function GameServer(http) {
   io.on('connection', function (socket) {
     var id = socket.id;
 
-    var player = new PlayerServer(id);
+    var player = Mockup.player();
     environment.addPlayer(player);
 
     // TODO: modulize this
