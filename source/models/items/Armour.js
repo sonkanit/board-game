@@ -11,4 +11,4 @@ Armour.prototype = Object.create(Equipment.prototype);
 
 Armour.prototype.defence = null;
 
-module.exports = Weapon;
+module.exports = Armour;

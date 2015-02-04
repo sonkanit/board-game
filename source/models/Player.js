@@ -5,7 +5,7 @@ var Token = require('./Token');
 var Cell = require('./Cell');
 
 var stringFormat = require('../utilities/stringFormat');
-var updator = require('../utilities/updator');
+var enitityUpdate = require('../utilities/enitityUpdate');
 
 function Player() {
   Creature.call(this);
@@ -33,8 +33,8 @@ Player.prototype.update = function (player) {
   this.name = player.name;
   this.coins = player.coins;
   this.online = player.online;
-  updator.call(this, 'token', player.token, Token);
-  updator.call(this, 'cell', player.cell, Cell);
+  enitityUpdate(this, 'token', player.token, Token);
+  enitityUpdate(this, 'cell', player.cell, Cell);
 };
 
 // Override

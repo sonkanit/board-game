@@ -2,7 +2,6 @@
 
 var Player = require('../../models/Player');
 var Token = require('../../models/Token');
-var Position = require('../../models/Position');
 
 var Chance = require('chance');
 var chance = new Chance();

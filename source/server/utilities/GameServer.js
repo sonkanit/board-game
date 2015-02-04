@@ -1,8 +1,5 @@
 'use strict';
 
-var PlayerServer = require('../models/PlayerServer');
-var EnvironmentServer = require('../models/EnvironmentServer');
-
 var EnvironmentActionType = require('../../constants/EnvironmentActionType');
 var PlayerActionType = require('../../constants/PlayerActionType');
 var RollActionType = require('../../constants/RollActionType');
@@ -18,8 +15,6 @@ function GameServer(http) {
   io = require('socket.io')(http);
 
   io.on('connection', function (socket) {
-    var id = socket.id;
-
     var player = Mockup.randomPlayer(environment);
     player.online = true;
 

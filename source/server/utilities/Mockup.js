@@ -3,7 +3,6 @@
 var EnvironmentServer = require('../models/EnvironmentServer');
 var PlayerServer = require('../models/PlayerServer');
 var Position = require('../../models/Position');
-var Map = require('../../models/Map');
 var Cell = require('../../models/Cell');
 var Path = require('../../models/Path');
 
