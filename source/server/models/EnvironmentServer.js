@@ -2,6 +2,8 @@
 
 var Environment = require('../../models/Environment');
 
+var Cell = require('../../models/Cell');
+
 function EnvironmentServer() {
   Environment.call(this);
 }
@@ -21,6 +23,13 @@ EnvironmentServer.prototype.removePlayer = function (player) {
   if (index !== -1) {
     this.players.splice(index, 1);
   }
+};
+
+EnvironmentServer.prototype.getCell = function (cell) {
+  // TODO: search for cell in maps
+  var _cell = new Cell();
+  _cell.update(cell);
+  return _cell;
 };
 
 // Override

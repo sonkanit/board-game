@@ -5,6 +5,7 @@ var PlayerServer = require('../models/PlayerServer');
 var Position = require('../../models/Position');
 var Cell = require('../../models/Cell');
 var Path = require('../../models/Path');
+var Map = require('../../models/Map');
 
 var Chance = require('chance');
 var chance = new Chance();

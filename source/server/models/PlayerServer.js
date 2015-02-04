@@ -30,10 +30,11 @@ PlayerServer.prototype.roll = function () {
   }
 };
 
-PlayerServer.prototype.walk = function (cell) {
+PlayerServer.prototype.walk = function (cell, environment) {
   if (validateWalk()) {
     this.token = null;
-    this.cell = cell;
+    this.cell = environment.getCell(cell);
+    this.cell.action(this);
     return this.cell;
   } else {
     throw 'Invalid walk path!';

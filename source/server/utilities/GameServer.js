@@ -38,7 +38,7 @@ function GameServer(http) {
     // TODO: duplicate code
     socket.on(WalkActionType.WALK, function (cell) {
       try {
-        player.walk(cell);
+        player.walk(cell, environment);
         socket.emit(WalkActionType.WALK_SUCCESS, player);
         socket.broadcast.emit(WalkActionType.WALK_SUCCESS, player.publicize());
       } catch (ex) {
