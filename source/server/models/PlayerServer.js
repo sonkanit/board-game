@@ -23,6 +23,7 @@ PlayerServer.prototype.roll = function () {
   if (this.coins > 0) {
     this.coins--;
     this.token = new Token();
+    this.token.id = chance.guid();
     this.token.walks = chance.d6();
     return this.token;
   } else {

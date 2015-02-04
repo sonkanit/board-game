@@ -1,11 +1,11 @@
 'use strict';
 
 var Environment = require('../../models/Environment');
-
-var PlayerClient = require('./PlayerClient');
-var MapClient = require('./MapClient');
+var Player = require('../../models/Player');
+var Map = require('../../models/Map');
 
 var findWithAttr = require('../../utilities/findWithAttr');
+var mapEntity = require('../../utilities/mapEntity');
 
 function EnvironmentClient() {
   Environment.call(this);
@@ -20,23 +20,12 @@ EnvironmentClient.prototype = Object.create(Environment.prototype);
 EnvironmentClient.prototype.logs = [];
 
 EnvironmentClient.prototype.update = function (environment) {
-  // TODO: update instead of re-create
-  this.players = environment.players.map(function (_player) {
-    var player = new PlayerClient();
-    player.update(_player);
-    return player;
-  });
-
-  // TODO: update instead of re-create
-  this.maps = environment.maps.map(function (_map) {
-    var map = new MapClient();
-    map.update(_map);
-    return map;
-  });
+  this.players = mapEntity(environment.players, Player);
+  this.maps = mapEntity(environment.maps, Map);
 };
 
 EnvironmentClient.prototype.addPlayer = function (player) {
-  var _player = new PlayerClient();
+  var _player = new Player();
   _player.update(player);
   this.players.push(_player);
 };

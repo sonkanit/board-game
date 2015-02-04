@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var EventEmitter = require('events').EventEmitter;
 
-var PlayerClient = require('../models/PlayerClient');
+var Player = require('../../models/Player');
 
 var PlayerActionType = require('../../constants/PlayerActionType');
 var RollActionType = require('../../constants/RollActionType');
@@ -13,7 +13,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var CHANGE_EVENT = 'PLAYER_CHANGE';
 
-var player = new PlayerClient();
+var player = new Player();
 
 var PlayerStore = _.extend({}, EventEmitter.prototype, {
   emitChange: function () {
