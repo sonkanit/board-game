@@ -17,9 +17,11 @@ Creature.prototype.defence = null;
 
 Creature.prototype.attackVary = null;
 
+Creature.prototype.thumbnail = null;
+
 // Override
 Creature.prototype.publics = function () {
-  return Entity.prototype.publics.call(this).concat(['hp', 'attack', 'defence', 'attackVary']);
+  return Entity.prototype.publics.call(this).concat(['hp', 'attack', 'defence', 'attackVary', 'thumbnail']);
 };
 
 module.exports = Creature;

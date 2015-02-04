@@ -3,6 +3,7 @@
 var Environment = require('../../models/Environment');
 
 var PlayerClient = require('./PlayerClient');
+var MapClient = require('./MapClient');
 
 var findWithAttr = require('../../utilities/findWithAttr');
 
@@ -19,13 +20,18 @@ EnvironmentClient.prototype = Object.create(Environment.prototype);
 EnvironmentClient.prototype.logs = [];
 
 EnvironmentClient.prototype.update = function (environment) {
-  var players = environment.players;
-
   // TODO: update instead of re-create
-  this.players = players.map(function (_player) {
+  this.players = environment.players.map(function (_player) {
     var player = new PlayerClient();
     player.update(_player);
     return player;
+  });
+
+  // TODO: update instead of re-create
+  this.maps = environment.maps.map(function (_map) {
+    var map = new MapClient();
+    map.update(_map);
+    return map;
   });
 };
 

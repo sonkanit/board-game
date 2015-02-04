@@ -26,12 +26,18 @@ var Demo = React.createClass({
 
     var walk = function () {
       // MOCKUP
-      WalkAction.walk(new Position(chance.integer({ min: 0, max: 100 }), chance.integer({ min: 0, max: 100 })));
+      WalkAction.walk(chance.pick(this.state.environment.maps[0].cells));
+    }.bind(this);
+
+    var sortPlayer = function (a, b) {
+      return a.online ? -1 : 1;
     };
 
     var getPlayerItem = function (player, idx) {
       return (
-        <li key={ player.id || 'undefined' }>{ toString(player.name) } { toString(player.position) }</li>
+        <li key={ player.id || 'undefined' } className={ player.online ? 'online' : '' }>
+          { toString(player.name) } { toString(player.cell) }
+        </li>
       );
     };
 
@@ -61,23 +67,23 @@ var Demo = React.createClass({
               <dd>{ this.state.player.coins }</dd>
               <dt>Token</dt>
               <dd>{ toString(this.state.player.token) }</dd>
-              <dt>Position</dt>
-              <dd>{ toString(this.state.player.position) }</dd>
+              <dt>Cell</dt>
+              <dd>{ toString(this.state.player.cell) }</dd>
             </dl>
             <button className="btn btn-primary" onClick={ roll }>Roll</button>
             <button className="btn btn-primary" style={ walkButton } onClick={ walk }>Walk</button>
           </div>
         </div>
         <div className="panel panel-default">
-          <div className="panel-body">
-            <h4>Online Players</h4>
+          <div className="panel-body player-list">
+            <h4>Players</h4>
             <ul>
-              { [this.state.player].concat(this.state.environment.players).map(getPlayerItem) }
+              { [this.state.player].concat(this.state.environment.players).sort(sortPlayer).map(getPlayerItem) }
             </ul>
           </div>
         </div>
         <div className="panel panel-default">
-          <div className="panel-body">
+          <div className="panel-body log">
             <h4>Logs</h4>
             <ul>
               { this.state.environment.logs.map(getLogItem) }

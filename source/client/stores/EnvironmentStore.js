@@ -40,11 +40,7 @@ var EnvironmentStore = _.extend({}, EventEmitter.prototype, {
         environment.update(action.environment);
         break;
       case EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED:
-        environment.addPlayer(action.player);
-        break;
       case EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED:
-        environment.removePlayer(action.player);
-        break;
       case RollActionType.ROLL_SUCCESS:
       case WalkActionType.WALK_SUCCESS:
         environment.updatePlayer(action.player);

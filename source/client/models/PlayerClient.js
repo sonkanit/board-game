@@ -1,8 +1,8 @@
 'use strict';
 
 var Player = require('../../models/Player');
+var CellClient = require('./CellClient');
 var TokenClient = require('./TokenClient');
-var PositionClient = require('./PositionClient');
 var stringFormat = require('../../utilities/stringFormat');
 
 var Entity = require('../../models/Entity');
@@ -22,6 +22,7 @@ PlayerClient.prototype.update = function (player) {
   this.id = player.id;
   this.name = player.name;
   this.coins = player.coins;
+  this.online = player.online;
 
   if (player.token) {
     if (!(this.token instanceof TokenClient)) {
@@ -32,13 +33,13 @@ PlayerClient.prototype.update = function (player) {
     this.token = null;
   }
 
-  if (player.position) {
-    if (!(this.position instanceof PositionClient)) {
-      this.position = new PositionClient();
+  if (player.cell) {
+    if (!(this.cell instanceof CellClient)) {
+      this.cell = new CellClient();
     }
-    this.position.update(player.position);
+    this.cell.update(player.cell);
   } else {
-    this.position = null;
+    this.cell = null;
   }
 };
 

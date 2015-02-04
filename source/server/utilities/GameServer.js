@@ -20,8 +20,8 @@ function GameServer(http) {
   io.on('connection', function (socket) {
     var id = socket.id;
 
-    var player = Mockup.player();
-    environment.addPlayer(player);
+    var player = Mockup.randomPlayer(environment);
+    player.online = true;
 
     // TODO: modulize this
     // TODO: minimize interaction??
@@ -41,9 +41,9 @@ function GameServer(http) {
     });
 
     // TODO: duplicate code
-    socket.on(WalkActionType.WALK, function (position) {
+    socket.on(WalkActionType.WALK, function (cell) {
       try {
-        player.walk(position);
+        player.walk(cell);
         socket.emit(WalkActionType.WALK_SUCCESS, player);
         socket.broadcast.emit(WalkActionType.WALK_SUCCESS, player.publicize());
       } catch (ex) {
@@ -52,7 +52,7 @@ function GameServer(http) {
     });
 
     socket.on('disconnect', function () {
-      environment.removePlayer(player);
+      player.online = false;
       socket.broadcast.emit(EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED, player.publicize());
     });
   });

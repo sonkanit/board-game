@@ -15,13 +15,13 @@ Player.prototype.coins = null;
 
 Player.prototype.token = null;
 
-Player.prototype.position = null;
+Player.prototype.cell = null;
 
 Player.prototype.online = null;
 
 // Override
 Player.prototype.publics = function () {
-  return Creature.prototype.publics.call(this).concat(['name', 'coins', 'token', 'position', 'online']);
+  return Creature.prototype.publics.call(this).concat(['name', 'coins', 'token', 'cell', 'online']);
 };
 
 module.exports = Player;

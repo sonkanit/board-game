@@ -30,7 +30,8 @@ EnvironmentServer.prototype.publicize = function (player) {
       return _player !== player;
     }).map(function (_player) {
       return _player.publicize();
-    })
+    }),
+    maps: this.maps
   };
 };
 
