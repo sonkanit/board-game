@@ -26,13 +26,6 @@ Cell.prototype.update = function (cell) {
   // this.place = cell.place;
 };
 
-Cell.prototype.action = function (player) {
-  // TODO:
-  // If there is any player here, attack him.
-  // If there is any place here, do its action.
-  return true;
-};
-
 // Override
 Cell.prototype.publics = function () {
   return Entity.prototype.publics.call(this).concat(['paths', 'postion', 'place']);

@@ -7,7 +7,12 @@ var Chance = require('chance');
 var chance = new Chance();
 
 var validateWalk = function () {
-  // TODO:
+  // TODO: check if the walk is valid.
+  return true;
+};
+
+var validateItem = function (item) {
+  // TODO: check if the player owns this item.
   return true;
 };
 
@@ -34,10 +39,20 @@ PlayerServer.prototype.walk = function (cell, environment) {
   if (validateWalk()) {
     this.token = null;
     this.cell = environment.getCell(cell);
-    this.cell.action(this);
+    this.cell.execute(this);
     return this.cell;
   } else {
     throw 'Invalid walk path!';
+  }
+};
+
+PlayerServer.prototype.use = function (item) {
+  if (validateItem(item)) {
+    var args = [this];
+    Array.prototype.push.apply(args, arguments);
+    return item.execute.apply(item, args);
+  } else {
+    throw 'You do not own this items!';
   }
 };
 
