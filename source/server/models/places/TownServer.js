@@ -1,6 +1,6 @@
 'use strict';
 
-var Church = require('../../models/Town');
+var Town = require('../../models/Town');
 
 function TownServer() {
   Town.call(this);

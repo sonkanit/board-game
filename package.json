@@ -30,9 +30,11 @@
     "underscore": "^1.7.0"
   },
   "devDependencies": {
-    "less": "~2.2.0",
     "browserify": "^8.0.3",
     "connect-browserify": "^3.2.1",
+    "jscs": "^1.10.0",
+    "jshint": "^2.6.0",
+    "less": "~2.2.0",
     "parallelshell": "~1.0.3",
     "reactify": "^0.17.1",
     "rimraf": "~2.2.8",
@@ -42,6 +44,7 @@
   "scripts": {
     "clean": "rimraf -f build",
     "less": "lessc source/client/style/app.less > build/app.css",
+    "lint": "jshint source | jscs",
     "watch:js": "supervisor -i node_modules -e js,jsx --debug source/server.js",
     "watch:less": "watch \"npm run less\" source/client/style/",
     "watch": "parallelshell \"npm run watch:less\" \"npm run watch:js\"",

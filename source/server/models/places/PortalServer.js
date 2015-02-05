@@ -1,6 +1,6 @@
 'use strict';
 
-var Church = require('../../models/Portal');
+var Portal = require('../../models/Portal');
 
 function PortalServer() {
   Portal.call(this);

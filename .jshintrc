@@ -7,6 +7,7 @@
     "after"      : false,
     "afterEach"  : false
   },
+  "predef": [ "-Map" ],
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,

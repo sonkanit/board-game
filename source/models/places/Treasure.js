@@ -7,7 +7,7 @@ function Treasure() {
 }
 
 // Inheritance
-Treasure.prototype = Object.create(Town.prototype);
+Treasure.prototype = Object.create(Place.prototype);
 
 // Effects/Items
 Treasure.prototype.contents = null;

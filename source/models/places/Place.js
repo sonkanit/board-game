@@ -11,9 +11,9 @@ Place.prototype = Object.create(Entity.prototype);
 
 Place.prototype.name = null;
 
-Item.prototype.thumbnail = null;
+Place.prototype.thumbnail = null;
 
-Item.prototype.skin = null;
+Place.prototype.skin = null;
 
 // To be override
 Place.prototype.action = function () {
