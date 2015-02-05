@@ -22,6 +22,10 @@ Map.prototype.paths = [];
 
 Map.prototype.skin = null;
 
+Map.prototype.width = null;
+
+Map.prototype.height = null;
+
 Map.prototype.update = function (map) {
   this.cells = mapEntity(map.cells, Cell);
   this.paths = mapEntity(map.paths, Path);
@@ -30,7 +34,7 @@ Map.prototype.update = function (map) {
 
 // Override
 Map.prototype.publics = function () {
-  return Entity.prototype.publics.call(this).concat(['cells', 'paths', 'skin']);
+  return Entity.prototype.publics.call(this).concat(['cells', 'paths', 'skin', 'width', 'height']);
 };
 
 module.exports = Map;
