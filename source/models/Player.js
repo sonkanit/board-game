@@ -3,11 +3,11 @@
 var Creature = require('./Creature');
 var Token = require('./Token');
 var Cell = require('./Cell');
-var Item = require('./items/Item');
+
+var ItemParser = require('./items/ItemParser');
 
 var stringFormat = require('../utilities/stringFormat');
 var enitityUpdate = require('../utilities/enitityUpdate');
-var mapEntity = require('../utilities/mapEntity');
 
 function Player() {
   Creature.call(this);
@@ -37,8 +37,7 @@ Player.prototype.update = function (player) {
   this.name = player.name;
   this.coins = player.coins;
   this.online = player.online;
-  // TODO: change Item to its specific class.
-  this.items = mapEntity(player.items, Item);
+  this.items = ItemParser.mapItemEntity(player.items);
   enitityUpdate(this, 'token', player.token, Token);
   enitityUpdate(this, 'cell', player.cell, Cell);
 };

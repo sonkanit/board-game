@@ -9,4 +9,6 @@ function Church() {
 // Inheritance
 Church.prototype = Object.create(Place.prototype);
 
+Church.prototype.type = 'Church';
+
 module.exports = Church;

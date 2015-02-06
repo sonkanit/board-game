@@ -4,6 +4,7 @@ var Equipment = require('./Equipment');
 
 function Weapon() {
   Equipment.call(this);
+  this.type = 'Weapon';
 }
 
 // Inheritance

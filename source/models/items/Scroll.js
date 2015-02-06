@@ -4,6 +4,7 @@ var Item = require('./Item');
 
 function Scroll() {
   Item.call(this);
+  this.type = 'Scroll';
 }
 
 // Inheritance

@@ -4,6 +4,7 @@ var Item = require('./Item');
 
 function Consumable() {
   Item.call(this);
+  this.type = 'Consumable';
 }
 
 // Inheritance

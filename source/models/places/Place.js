@@ -9,6 +9,9 @@ function Place() {
 // Inheritance
 Place.prototype = Object.create(Entity.prototype);
 
+// For serialization
+Place.prototype.type = null;
+
 Place.prototype.name = null;
 
 Place.prototype.thumbnail = null;

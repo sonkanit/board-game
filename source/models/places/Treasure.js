@@ -9,6 +9,8 @@ function Treasure() {
 // Inheritance
 Treasure.prototype = Object.create(Place.prototype);
 
+Treasure.prototype.type = 'Treasure';
+
 // Effects/Items
 Treasure.prototype.contents = null;
 

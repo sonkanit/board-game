@@ -9,6 +9,8 @@ function Town() {
 // Inheritance
 Town.prototype = Object.create(Town.prototype);
 
+Town.prototype.type = 'Town';
+
 Town.prototype.income = null;
 
 module.exports = Town;

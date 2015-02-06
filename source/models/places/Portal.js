@@ -9,6 +9,8 @@ function Portal() {
 // Inheritance
 Portal.prototype = Object.create(Portal.prototype);
 
+Portal.prototype.type = 'Portal';
+
 Portal.prototype.destination = null;
 
 module.exports = Portal;
