@@ -70,6 +70,7 @@ var Mockup = {
   map: function () {
     var map = new Map();
     map.id = chance.guid();
+    map.skin = 'http://img2.wikia.nocookie.net/__cb20091103162232/lotr/images/5/5e/Middle-earth-film.jpg';
     chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
       .forEach(function () { map.cells.push(Mockup.cell()); });
     chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))

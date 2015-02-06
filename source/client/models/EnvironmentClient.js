@@ -2,8 +2,10 @@
 
 var Environment = require('../../models/Environment');
 var Player = require('../../models/Player');
+var MapClient = require('./MapClient');
 
 var findWithAttr = require('../../utilities/findWithAttr');
+var mapEntity = require('../../utilities/mapEntity');
 
 function EnvironmentClient() {
   Environment.call(this);
@@ -35,6 +37,17 @@ EnvironmentClient.prototype.updatePlayer = function (player) {
   if (idx > -1) {
     this.players[idx].update(player);
   }
+};
+
+EnvironmentClient.prototype.update = function (environment) {
+  Environment.prototype.update.call(this, environment);
+
+  this.players = mapEntity(environment.players, Player);
+  this.maps = mapEntity(environment.maps, MapClient);
+  if (environment.items) {
+    this.items = ItemParser.mapItemEntity(environment.items);
+  }
+
 };
 
 module.exports = EnvironmentClient;
