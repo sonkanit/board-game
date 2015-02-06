@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-
+var GameCanvas = require('./GameCanvas.jsx');
 var GameMixin = require('../mixins/GameMixin');
 
 var RollAction = require('../actions/RollAction');
@@ -57,6 +57,7 @@ var Demo = React.createClass({
 
     return (
       <div>
+        <GameCanvas width="800" height="600"></GameCanvas>
         <div className="panel panel-default">
           <div className="panel-body">
             <h4>{ this.state.player.name }</h4>
