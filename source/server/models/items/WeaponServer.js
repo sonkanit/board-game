@@ -1,6 +1,6 @@
 'use strict';
 
-var Weapon = require('../../models/Weapon');
+var Weapon = require('../../../models/items/Weapon');
 
 function WeaponServer() {
   Weapon.call(this);

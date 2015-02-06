@@ -18,4 +18,8 @@ Entity.prototype.publics = function () {
   return ['id'];
 };
 
+Entity.prototype.update = function (entity) {
+  this.id = entity.id;
+};
+
 module.exports = Entity;

@@ -1,6 +1,6 @@
 'use strict';
 
-var Consumable = require('../../models/Consumable');
+var Consumable = require('../../../models/items/Consumable');
 
 function ConsumableServer() {
   Consumable.call(this);

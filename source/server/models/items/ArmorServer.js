@@ -1,6 +1,6 @@
 'use strict';
 
-var Armor = require('../../models/Armor');
+var Armor = require('../../../models/items/Armor');
 
 function ArmorServer() {
   Armor.call(this);

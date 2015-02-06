@@ -13,4 +13,10 @@ Equipment.prototype.lifespan = null;
 
 Equipment.prototype.effect = null;
 
+Equipment.prototype.update = function (equipment) {
+  Item.prototype.update.call(this, equipment);
+  this.lifespan = equipment.lifespan;
+  this.effect = equipment.effect;
+};
+
 module.exports = Equipment;
