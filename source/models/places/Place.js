@@ -1,9 +1,11 @@
 'use strict';
 
 var Entity = require('../Entity');
+var Position = require('../Position');
 
 function Place() {
   Entity.call(this);
+  this.type = 'Cell'; // 'Place'??
 }
 
 // Inheritance
@@ -18,8 +20,10 @@ Place.prototype.thumbnail = null;
 
 Place.prototype.skin = null;
 
+Place.prototype.position = null;
+
 Place.prototype.toString = function () {
-  return this.type + ' ' + this.name;
+  return this.type + ' ' + this.name + ' - ' + (this.position && this.position.toString());
 };
 
 Place.prototype.update = function (place) {
@@ -28,6 +32,8 @@ Place.prototype.update = function (place) {
   this.name = place.name;
   this.thumbnail = place.thumbnail;
   this.skin = place.skin;
+  this.position = new Position();
+  this.position.update(place.position);
 };
 
 module.exports = Place;

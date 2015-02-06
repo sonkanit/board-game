@@ -1,22 +1,22 @@
 'use strict';
 
 var Entity = require('./Entity');
-var Cell = require('./Cell');
 var Path = require('./Path');
+var Place = require('./places/Place');
 
 var mapEntity = require('../utilities/mapEntity');
 
 function Map() {
   Entity.call(this);
   // TODO: WITHOUT THIS WILL CAUSE BUG IN REACT
-  this.cells = [];
+  this.places = [];
   this.paths = [];
 }
 
 // Inheritance
 Map.prototype = Object.create(Entity.prototype);
 
-Map.prototype.cells = [];
+Map.prototype.places = [];
 
 Map.prototype.paths = [];
 
@@ -28,7 +28,7 @@ Map.prototype.height = null;
 
 Map.prototype.update = function (map) {
   Entity.prototype.update.call(this, map);
-  this.cells = mapEntity(map.cells, Cell);
+  this.places = mapEntity(map.places, Place);
   this.paths = mapEntity(map.paths, Path);
   this.skin = map.skin;
   this.width = map.width;
@@ -37,7 +37,7 @@ Map.prototype.update = function (map) {
 
 // Override
 Map.prototype.publics = function () {
-  return Entity.prototype.publics.call(this).concat(['cells', 'paths', 'skin', 'width', 'height']);
+  return Entity.prototype.publics.call(this).concat(['places', 'paths', 'skin', 'width', 'height']);
 };
 
 module.exports = Map;

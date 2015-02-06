@@ -27,7 +27,7 @@ var sortPlayer = function (a, b) {
 var getPlayerItem = function (player, idx) {
   return (
     <li key={ player.id || 'undefined' } className={ player.online ? 'online' : '' }>
-      { toString(player.name) } - { toString(player.cell) }
+      { toString(player.name) } - { toString(player.place) }
     </li>
   );
 };
@@ -59,7 +59,7 @@ var Demo = React.createClass({
     var walk = function () {
       // MOCKUP
       var map = chance.pick(this.state.environment.maps);
-      WalkAction.walk(chance.pick(map.cells));
+      WalkAction.walk(chance.pick(map.places));
     }.bind(this);
 
     return (
@@ -74,8 +74,8 @@ var Demo = React.createClass({
               <dd>{ this.state.player.coins }</dd>
               <dt>Token</dt>
               <dd>{ toString(this.state.player.token) }</dd>
-              <dt>Cell</dt>
-              <dd>{ toString(this.state.player.cell) }</dd>
+              <dt>Place</dt>
+              <dd>{ toString(this.state.player.place) }</dd>
             </dl>
             <button className="btn btn-primary" onClick={ roll }>Roll</button>
             <button className="btn btn-primary" style={ walkButton } onClick={ walk }>Walk</button>
