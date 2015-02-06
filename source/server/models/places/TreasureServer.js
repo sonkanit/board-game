@@ -1,6 +1,6 @@
 'use strict';
 
-var Treasure = require('../../models/Treasure');
+var Treasure = require('../../../models/places/Treasure');
 
 function TreasureServer() {
   Treasure.call(this);

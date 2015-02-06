@@ -16,9 +16,11 @@ Environment.prototype.players = [];
 
 Environment.prototype.maps = [];
 
+Environment.prototype.items = [];
+
 // Override
 Environment.prototype.publics = function () {
-  return Entity.prototype.publics.call(this).concat(['players', 'maps']);
+  return Entity.prototype.publics.call(this).concat(['players', 'maps', 'items']);
 };
 
 module.exports = Environment;

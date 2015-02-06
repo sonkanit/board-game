@@ -1,6 +1,6 @@
 'use strict';
 
-var Scroll = require('../../models/Scroll');
+var Scroll = require('../../../models/items/Scroll');
 
 function ScrollServer() {
   Scroll.call(this);

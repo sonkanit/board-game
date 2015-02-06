@@ -41,9 +41,9 @@ var Demo = React.createClass({
       );
     };
 
-    var getLogItem = function (log, idx) {
+    var getListItem = function (item, idx) {
       return (
-        <li key={ idx }>{ log }</li>
+        <li key={ idx }>{ item }</li>
       );
     };
 
@@ -75,6 +75,14 @@ var Demo = React.createClass({
           </div>
         </div>
         <div className="panel panel-default">
+          <div className="panel-body demo-list-container">
+            <h4>Items</h4>
+            <ul>
+              { this.state.player.items.map(getListItem) }
+            </ul>
+          </div>
+        </div>
+        <div className="panel panel-default">
           <div className="panel-body player-list">
             <h4>Players</h4>
             <ul>
@@ -83,10 +91,10 @@ var Demo = React.createClass({
           </div>
         </div>
         <div className="panel panel-default">
-          <div className="panel-body log">
+          <div className="panel-body demo-list-container">
             <h4>Logs</h4>
             <ul>
-              { this.state.environment.logs.map(getLogItem) }
+              { this.state.environment.logs.map(getListItem) }
             </ul>
           </div>
         </div>

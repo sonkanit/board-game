@@ -15,4 +15,11 @@ Item.prototype.description = null;
 
 Item.prototype.thumbnail = null;
 
+Item.prototype.update = function (item) {
+  this.id = item.id;
+  this.name = item.name;
+  this.description = item.description;
+  this.thumbnail = item.thumbnail;
+};
+
 module.exports = Item;

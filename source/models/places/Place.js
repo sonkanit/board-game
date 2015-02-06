@@ -15,9 +15,4 @@ Place.prototype.thumbnail = null;
 
 Place.prototype.skin = null;
 
-// To be override
-Place.prototype.action = function () {
-
-};
-
 module.exports = Place;

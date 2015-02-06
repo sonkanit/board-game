@@ -9,6 +9,7 @@ function Consumable() {
 // Inheritance
 Consumable.prototype = Object.create(Item.prototype);
 
-Consumable.prototype.effect = null;
+// TO BE CHANGE TO effect
+Consumable.prototype.hp = null;
 
 module.exports = Consumable;
