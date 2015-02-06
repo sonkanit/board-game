@@ -8,7 +8,7 @@ function Town() {
 }
 
 // Inheritance
-Town.prototype = Object.create(Town.prototype);
+Town.prototype = Object.create(Place.prototype);
 
 Town.prototype.type = 'Town';
 

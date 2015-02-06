@@ -16,44 +16,51 @@ var Position = require('../../models/Position');
 var Chance = require('chance');
 var chance = new Chance();
 
+var roll = function () {
+  RollAction.roll();
+};
+
+var sortPlayer = function (a, b) {
+  return a.online ? -1 : 1;
+};
+
+var getPlayerItem = function (player, idx) {
+  return (
+    <li key={ player.id || 'undefined' } className={ player.online ? 'online' : '' }>
+      { toString(player.name) } - { toString(player.cell) }
+    </li>
+  );
+};
+
+var getListItem = function (item, idx) {
+  return (
+    <li key={ idx }>{ item }</li>
+  );
+};
+
+var getListItemString = function (item, idx) {
+  return (
+    <li key={ idx }>{ item.toString() }</li>
+  );
+};
+
+var toString = function (obj) {
+  return (obj && obj.toString && obj.toString()) || '';
+};
+
 var Demo = React.createClass({
   mixins: [GameMixin],
 
   render: function () {
-    var roll = function () {
-      RollAction.roll();
-    };
-
-    var walk = function () {
-      // MOCKUP
-      WalkAction.walk(chance.pick(this.state.environment.maps[0].cells));
-    }.bind(this);
-
-    var sortPlayer = function (a, b) {
-      return a.online ? -1 : 1;
-    };
-
-    var getPlayerItem = function (player, idx) {
-      return (
-        <li key={ player.id || 'undefined' } className={ player.online ? 'online' : '' }>
-          { toString(player.name) } { toString(player.cell) }
-        </li>
-      );
-    };
-
-    var getListItem = function (item, idx) {
-      return (
-        <li key={ idx }>{ item }</li>
-      );
-    };
-
     var walkButton = {
       display: this.state.player.token ? '' : 'none'
     };
 
-    var toString = function (obj) {
-      return (obj && obj.toString && obj.toString()) || '';
-    };
+    var walk = function () {
+      // MOCKUP
+      var map = chance.pick(this.state.environment.maps);
+      WalkAction.walk(chance.pick(map.cells));
+    }.bind(this);
 
     return (
       <div>
@@ -78,7 +85,7 @@ var Demo = React.createClass({
           <div className="panel-body demo-list-container">
             <h4>Items</h4>
             <ul>
-              { this.state.player.items.map(getListItem) }
+              { this.state.player.items.map(getListItemString) }
             </ul>
           </div>
         </div>

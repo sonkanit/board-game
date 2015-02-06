@@ -1,6 +1,9 @@
 'use strict';
 
 var Item = require('./Item');
+var Effect = require('../Effect');
+
+var enitityUpdate = require('../../utilities/enitityUpdate');
 
 function Equipment() {
   Item.call(this);
@@ -16,7 +19,7 @@ Equipment.prototype.effect = null;
 Equipment.prototype.update = function (equipment) {
   Item.prototype.update.call(this, equipment);
   this.lifespan = equipment.lifespan;
-  this.effect = equipment.effect;
+  enitityUpdate(this, 'effect', equipment.effect, Effect);
 };
 
 module.exports = Equipment;

@@ -18,6 +18,10 @@ Item.prototype.description = null;
 
 Item.prototype.thumbnail = null;
 
+Item.prototype.toString = function () {
+  return this.type + ' ' + this.name;
+};
+
 Item.prototype.update = function (item) {
   Entity.prototype.update.call(this, item);
   this.type = item.type;

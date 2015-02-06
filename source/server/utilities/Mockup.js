@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('underscore');
+
 var EnvironmentServer = require('../models/EnvironmentServer');
 var PlayerServer = require('../models/PlayerServer');
 
@@ -12,6 +14,7 @@ var ChurchServer = require('../models/places/ChurchServer');
 var PortalServer = require('../models/places/PortalServer');
 var TownServer = require('../models/places/TownServer');
 var TreasureServer = require('../models/places/TreasureServer');
+var EffectServer = require('../models/EffectServer');
 
 var Position = require('../../models/Position');
 var Cell = require('../../models/Cell');
@@ -48,10 +51,22 @@ var Mockup = {
     var environment = new EnvironmentServer();
     environment.maps = chance.n(chance.integer, chance.integer({ min: 5, max: 10 }))
       .map(function () { return Mockup.map(); });
+    environment.effects = chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
+      .map(function () { return Mockup.effect(); });
     environment.items = chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
-      .map(function () { return Mockup.item(); });
+      .map(function () { return Mockup.item(environment); });
     environment.players = chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
       .map(function () { return Mockup.player(environment); });
+
+    var nonTreasureItems = environment.items.filter(function (item) { return !(item instanceof TreasureServer); });
+    var tresureItems = environment.items.filter(function (item) { return item instanceof TreasureServer; });
+    tresureItems.forEach(function (treasure) { treasure.contents = chance.pick(nonTreasureItems, 10); });
+
+    // var allCells = _.flatten(environment.maps.map(function (map) { return map.cells; }));
+    // var nonPortalCells = allCells.filter(function (cell) { return !(cell.place instanceof PortalServer); });
+    // var portalCells = allCells.filter(function (cell) { return cell.place instanceof PortalServer; });
+    // portalCells.forEach(function (cell) { cell.place.destination = chance.pick(nonPortalCells); });
+
     return environment;
   },
   player: function (environment) {
@@ -83,19 +98,33 @@ var Mockup = {
     cell.place = chance.bool({ likelihood: 10 }) ? Mockup.place() : null;
     return cell;
   },
-  item: function () {
-    return chance.pick([Mockup.armor, Mockup.consumable, Mockup.scroll, Mockup.weapon])();
+  effect: function () {
+    var effect = new EffectServer();
+    effect.name = chance.word();
+    effect.status = chance.word();
+    effect.value = chance.integer({ min: 0, max: 100 });
+    effect.lifespan = chance.integer({ min: 0, max: 100 });
+    return effect;
   },
-  armor: function () {
+  item: function (environment) {
+    return chance.pick([Mockup.armor, Mockup.consumable, Mockup.scroll, Mockup.weapon])(environment);
+  },
+  armor: function (environment) {
     var armor = new ArmorServer();
     mockItem(armor);
+    armor.lifespan = chance.integer({ min: 0, max: 100 });
     armor.defence = chance.integer({ min: 1, max: 10 });
+    if (environment instanceof EnvironmentServer) {
+      armor.effect = chance.pick(environment.effects);
+    }
     return armor;
   },
-  consumable: function () {
+  consumable: function (environment) {
     var consumable = new ConsumableServer();
     mockItem(consumable);
-    consumable.effect = chance.integer({ min: 1, max: 100 });
+    if (environment instanceof EnvironmentServer) {
+      consumable.effect = chance.pick(environment.effects);
+    }
     return consumable;
   },
   scroll: function () {
@@ -106,10 +135,14 @@ var Mockup = {
     scroll.aoe = chance.integer({ min: 1, max: 100 });
     return scroll;
   },
-  weapon: function () {
+  weapon: function (environment) {
     var weapon = new WeaponServer();
     mockItem(weapon);
+    weapon.lifespan = chance.integer({ min: 0, max: 100 });
     weapon.attack = chance.integer({ min: 10, max: 200 });
+    if (environment instanceof EnvironmentServer) {
+      weapon.effect = chance.pick(environment.effects);
+    }
     return weapon;
   },
   place: function () {
@@ -135,7 +168,7 @@ var Mockup = {
   treasure: function () {
     var treasure = new TreasureServer();
     mockPlace(treasure);
-    // treasure.contents = chance.integer({ min: 10, max: 500 });
+    // treasure.contents
     return treasure;
   },
 

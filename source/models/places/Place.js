@@ -18,6 +18,10 @@ Place.prototype.thumbnail = null;
 
 Place.prototype.skin = null;
 
+Place.prototype.toString = function () {
+  return this.type + ' ' + this.name;
+};
+
 Place.prototype.update = function (place) {
   Entity.prototype.update.call(this, place);
   this.type = place.type;

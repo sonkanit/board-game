@@ -11,6 +11,10 @@ function EnvironmentServer() {
 // Inheritance
 EnvironmentServer.prototype = Object.create(Environment.prototype);
 
+EnvironmentServer.prototype.items = [];
+
+EnvironmentServer.prototype.effects = [];
+
 EnvironmentServer.prototype.addPlayer = function (player) {
   var index = this.players.indexOf(player);
   if (index === -1) {

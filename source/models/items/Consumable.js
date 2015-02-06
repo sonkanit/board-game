@@ -1,6 +1,9 @@
 'use strict';
 
 var Item = require('./Item');
+var Effect = require('../Effect');
+
+var enitityUpdate = require('../../utilities/enitityUpdate');
 
 function Consumable() {
   Item.call(this);
@@ -10,12 +13,11 @@ function Consumable() {
 // Inheritance
 Consumable.prototype = Object.create(Item.prototype);
 
-// TO BE CHANGE TO effect
-Consumable.prototype.hp = null;
+Consumable.prototype.effect = null;
 
 Consumable.prototype.update = function (consumable) {
   Item.prototype.update.call(this, consumable);
-  this.hp = consumable.hp;
+  enitityUpdate(this, 'effect', consumable.effect, Effect);
 };
 
 module.exports = Consumable;

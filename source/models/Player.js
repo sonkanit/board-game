@@ -37,7 +37,7 @@ Player.prototype.update = function (player) {
   this.name = player.name;
   this.coins = player.coins;
   this.online = player.online;
-  this.items = ItemParser.mapItemEntity(player.items);
+  this.items = ItemParser.parseMany(player.items);
   enitityUpdate(this, 'token', player.token, Token);
   enitityUpdate(this, 'cell', player.cell, Cell);
 };
