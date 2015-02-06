@@ -19,7 +19,7 @@ Item.prototype.description = null;
 Item.prototype.thumbnail = null;
 
 Item.prototype.update = function (item) {
-  this.id = item.id;
+  Entity.prototype.update.call(this, item);
   this.type = item.type;
   this.name = item.name;
   this.description = item.description;

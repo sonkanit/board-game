@@ -18,4 +18,12 @@ Place.prototype.thumbnail = null;
 
 Place.prototype.skin = null;
 
+Place.prototype.update = function (place) {
+  Entity.prototype.update.call(this, place);
+  this.type = place.type;
+  this.name = place.name;
+  this.thumbnail = place.thumbnail;
+  this.skin = place.skin;
+};
+
 module.exports = Place;

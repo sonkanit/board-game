@@ -33,7 +33,7 @@ Player.prototype.toString = function () {
 };
 
 Player.prototype.update = function (player) {
-  this.id = player.id;
+  Creature.prototype.update.call(this, player);
   this.name = player.name;
   this.coins = player.coins;
   this.online = player.online;

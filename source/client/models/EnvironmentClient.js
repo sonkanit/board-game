@@ -2,10 +2,8 @@
 
 var Environment = require('../../models/Environment');
 var Player = require('../../models/Player');
-var Map = require('../../models/Map');
 
 var findWithAttr = require('../../utilities/findWithAttr');
-var mapEntity = require('../../utilities/mapEntity');
 
 function EnvironmentClient() {
   Environment.call(this);
@@ -18,11 +16,6 @@ function EnvironmentClient() {
 EnvironmentClient.prototype = Object.create(Environment.prototype);
 
 EnvironmentClient.prototype.logs = [];
-
-EnvironmentClient.prototype.update = function (environment) {
-  this.players = mapEntity(environment.players, Player);
-  this.maps = mapEntity(environment.maps, Map);
-};
 
 EnvironmentClient.prototype.addPlayer = function (player) {
   var _player = new Player();

@@ -9,8 +9,4 @@ function Monster() {
 // Inheritance
 Monster.prototype = Object.create(Creature.prototype);
 
-// Items
-// Coins
-Monster.prototype.drops = null;
-
 module.exports = Monster;

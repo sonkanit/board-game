@@ -16,14 +16,15 @@ Cell.prototype.position = null;
 
 Cell.prototype.place = null;
 
-Cell.prototype.toString = function () {
-  return (this.position && this.position.toString()) || '';
-};
-
 Cell.prototype.update = function (cell) {
+  Entity.prototype.update.call(this, cell);
   this.position = new Position();
   this.position.update(cell.position);
   // this.place = cell.place;
+};
+
+Cell.prototype.toString = function () {
+  return (this.position && this.position.toString()) || '';
 };
 
 // Override

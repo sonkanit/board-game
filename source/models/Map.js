@@ -27,9 +27,12 @@ Map.prototype.width = null;
 Map.prototype.height = null;
 
 Map.prototype.update = function (map) {
+  Entity.prototype.update.call(this, map);
   this.cells = mapEntity(map.cells, Cell);
   this.paths = mapEntity(map.paths, Path);
   this.skin = map.skin;
+  this.width = map.width;
+  this.height = map.height;
 };
 
 // Override
